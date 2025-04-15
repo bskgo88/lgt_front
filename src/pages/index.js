@@ -1,113 +1,161 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+import React from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  BarChart,
+  Bar
+} from "recharts";
+import {
+  Box,
+  Typography,
+  IconButton,
+  Divider,
+  MenuItem,
+  Select,
+  Paper,
+  Grid
+} from "@mui/material";
+import { Download, FilterList } from "@mui/icons-material";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const COLORS = ["#f97316", "#60a5fa", "#34d399", "#c084fc"];
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const dummyLineData = [
+  { date: "08.28", UD: 50, Duration: 120, Access: 30 },
+  { date: "08.29", UD: 180, Duration: 230, Access: 100 },
+  { date: "08.30", UD: 500, Duration: 460, Access: 160 },
+  { date: "08.31", UD: 400, Duration: 540, Access: 200 },
+  { date: "09.01", UD: 700, Duration: 590, Access: 300 },
+  { date: "09.02", UD: 600, Duration: 580, Access: 400 },
+  { date: "09.03", UD: 550, Duration: 620, Access: 350 }
+];
 
-export default function Home() {
+const dummyPieData = [
+  { name: "webOS 3.0", value: 300 },
+  { name: "webOS 22", value: 200 }
+];
+
+const dummyDeviceData = [
+  { name: "LG TV", value: 100 },
+  { name: "Unknown", value: 900 }
+];
+
+export default function OverviewPage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/pages/index.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    <Box sx={{ display: "flex", bgcolor: "#f5f5f2" }}>
+      <Box sx={{ width: 80, height: "100vh", bgcolor: "#1e1e1e" }}></Box>
+
+      <Box sx={{ flex: 1, p: 3 }}>
+        <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
+          <Typography variant="h6" fontWeight="bold" color="#000">Overview Page</Typography>
+          <Box display="flex" gap={2}>
+            <Typography sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              + Create a new segment
+            </Typography>
+            <Select size="small" defaultValue="Time Period">
+              <MenuItem value="Time Period">Time Period</MenuItem>
+            </Select>
+            <IconButton>
+              <Download />
+            </IconButton>
+          </Box>
+        </Box>
+
+        <Box display="flex" alignItems="center" gap={1} mb={3}>
+          <FilterList fontSize="small" sx={{ color: '#333333' }} />
+          <Typography variant="body2" sx={{ color:'#333333' }}>United States</Typography>
+          <Typography variant="body2" sx={{ color:'#333333' }}> +1 other</Typography>
+          <Typography variant="body2" sx={{ ml: 1, color:'#333333' }}>Text</Typography>
+          <Typography variant="body2">Text</Typography>
+        </Box>
+
+        <Grid container spacing={2} mb={3}>
+          {["7.54K", "119.94K", "70.00K", "7.00K", "5.94K", "157", "100", "10"].map((value, i) => (
+            <Grid size={{xs:1.5}} key={i}>
+              <Paper elevation={1} sx={{ p: 2, textAlign: "center" }}>
+                <Typography variant="body2" color="textSecondary">UD (Unique Device)</Typography>
+                <Typography variant="h6" fontWeight="bold">{value}</Typography>
+                <Typography variant="body2" color={i % 3 === 0 ? "primary" : "error"}>{i % 3 === 0 ? "▲" : "▼"} {Math.abs((i + 1) * 1.23).toFixed(2)}%</Typography>
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
+
+        <Grid container spacing={2}>
+          <Grid size={{xs:6, ms:6}}>
+            <Paper sx={{ p: 2 }}>
+              <Typography variant="subtitle2" fontWeight="medium">Over Time</Typography>
+              <ResponsiveContainer width="100%" height={250}>
+                <LineChart data={dummyLineData}>
+                  <XAxis dataKey="date" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend verticalAlign="top" height={36}/>
+                  <Line type="monotone" dataKey="UD" stroke="#f97316" name="UD" />
+                  <Line type="monotone" dataKey="Duration" stroke="#60a5fa" name="Duration" />
+                  <Line type="monotone" dataKey="Access" stroke="#34d399" name="Access" />
+                </LineChart>
+              </ResponsiveContainer>
+            </Paper>
+          </Grid>
+
+          <Grid size={{xs:6, ms:6}}>
+            <Paper sx={{ p: 2 }}>
+              <Typography variant="subtitle2" fontWeight="medium">Stream Type</Typography>
+              <ResponsiveContainer width="100%" height={250}>
+                <LineChart data={dummyLineData}>
+                  <XAxis dataKey="date" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend verticalAlign="top" height={36}/>
+                  <Line type="monotone" dataKey="UD" stroke="#f97316" name="Live TV_Ch" />
+                  <Line type="monotone" dataKey="Duration" stroke="#60a5fa" name="Live TV_VOD" />
+                  <Line type="monotone" dataKey="Access" stroke="#34d399" name="HomeApp_Ch" />
+                </LineChart>
+              </ResponsiveContainer>
+            </Paper>
+          </Grid>
+
+          <Grid size={{xs:6, ms:6}}>
+            <Paper sx={{ p: 2 }}>
+              <Typography variant="subtitle2" fontWeight="medium">Group By WebOS Platform</Typography>
+              <ResponsiveContainer width="100%" height={250}>
+                <PieChart>
+                  <Pie data={dummyPieData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={60} label>
+                    {dummyPieData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Legend verticalAlign="bottom" height={36}/>
+                </PieChart>
+              </ResponsiveContainer>
+            </Paper>
+          </Grid>
+
+          <Grid size={{xs:6, ms:6}}>
+            <Paper sx={{ p: 2 }}>
+              <Typography variant="subtitle2" fontWeight="medium">Group By Device</Typography>
+              <ResponsiveContainer width="100%" height={250}>
+                <PieChart>
+                  <Pie data={dummyDeviceData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={60} label>
+                    {dummyDeviceData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Legend verticalAlign="bottom" height={36}/>
+                </PieChart>
+              </ResponsiveContainer>
+            </Paper>
+          </Grid>
+        </Grid>
+      </Box>
+    </Box>
   );
 }
