@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^7.0.2",
     "@mui/material": "^7.0.2",
+    "@next/font": "^14.2.15",
     "my-next-app": "file:",
     "next": "15.2.4",
     "react": "^19.0.0",
@@ -24,6 +25,7 @@
     "@tailwindcss/postcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
+    "sass": "^1.87.0",
     "tailwindcss": "^4"
   }
 }
