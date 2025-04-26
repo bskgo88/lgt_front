@@ -1,0 +1,89 @@
+.SetTDB {
+  display:flex; width:100%; height:calc(100vh - 60px); justify-content:center; align-items:center;
+}
+
+.seticon {
+  position:relative;
+  &::after {
+    content:""; display:flex; width:4px; height:4px; background-color:#FFFFFF; position:absolute; top:calc(50% - 2px); left:20px; border-radius:4px;
+  }
+}
+
+.setitem {
+  height:40px;
+  span {display:flex; width:100%; height:24px; overflow:hidden; line-height:24px;}
+}
+
+.overviewContainer {
+  display:flex; flex-direction:column; padding: 40px 40px 16px; background-color: #f4f6f8;
+  .overTop {
+    display:flex; flex-direction:row; justify-content:space-between; align-items:center; margin-bottom:20px;
+  }
+  .overviewTitle {
+    font-size:24px; font-weight:600; text-align:left;
+  }
+  .LeftCont {display:flex;}
+  .RightCont {display:flex; flex-direction:row; justify-content:flex-end; align-items:center;}
+}
+
+.overChartCont {
+  display:flex; flex-direction:column; padding: 0 40px 16px; background-color: #f4f6f8;
+  .gridBox {
+    display:flex; flex-direction:column; padding:20px; background-color:#FFFFFF; border-radius: 12px;
+  }
+}
+
+.selectItem {
+  display:inline-flex; padding:6px 12px; border-radius:6px;
+  option {color:#FFFFFF;}
+  .arrowItem {padding-right:6px;}
+}
+
+.filterBar {
+  display: flex; align-items: center; margin-bottom: 24px; background-color: #28353d; color: white; padding: 16px; border-radius: 4px;
+  .filterButton {
+    background: none; color: white; border: none; padding: 8px; margin-right: 16px; cursor: pointer;
+  }
+}
+
+.searchInput {
+  display: inline-flex; flex: 1 1 100px; background: none; color: white; border: none; padding: 8px; margin-right: 16px;
+  &::placeholder { color: #ccc; }
+}
+.textButton {
+  background: none; color: white; border: 1px solid #555; padding: 8px 12px; margin-left: 8px; border-radius: 4px; cursor: pointer;
+}
+.spacer {
+  flex-grow: 1;
+}
+.createSegmentButton {
+  display:inline-flex; justify-content:space-between; align-items:center; padding:6px 12px; border-radius:6px; background-color: #7D9D9C; cursor:pointer;
+  span {display:inline-flex; margin-left:4px; font-size:14px; line-height:20px; color:#FFFFFF;}
+}
+.iconButton {
+  background:#FFFFFF; border:none; margin-left:8px; padding:6px; border-radius:6px; cursor:pointer;
+}
+.downloadButton {
+  background: none; color: white; border: none; padding: 8px; margin-left: 16px; cursor: pointer; display: flex; align-items: center;
+}
+.metricGrid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px;
+}
+.metricCard {
+  display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; background-color: white; padding: 16px 20px; text-align: center; border-radius: 4px; height: 122px; 
+}
+.metricTitle { 
+  display: flex; text-align: left; height: 32px; line-height: 16px; font-size: 14px; letter-spacing: 0; font-weight: 400; color: #666666; 
+}
+.metricValue {
+  display: flex; text-align: left; line-height: 32px; font-size: 22px; color: #1a1a1a; font-weight: 500; 
+}
+.metricChangePositive {
+  display: flex; text-align: left; font-weight: 600; font-size: 14px; line-height: 20px; color: #2C4EF8; 
+}
+.metricChangeNegative {
+  display: flex; text-align: left; font-weight: 600; font-size: 14px; line-height: 20px; color: #F04345; 
+}
+.recharts-tooltip-item-name {
+  font-weight: bold; margin-right: 5px;
+}

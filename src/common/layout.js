@@ -4,7 +4,7 @@ export default function Layout({ children }) {
   return (
     <div className="flex">
       <Nav />
-      <main className="ml-16 md:ml-16 flex-1 p-6">{children}</main>
+      <main className="ml-22 md:ml-22 flex-1">{children}</main>
     </div>
   );
 }

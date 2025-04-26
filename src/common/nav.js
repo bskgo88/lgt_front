@@ -60,12 +60,12 @@ export default function Sidebar() {
           </div>
           {isHovered && audienceOpen && (
             <div className="ml-2 mt-3 mb-3 space-y-1">
-              {menuItem("Overview", "Audience/Overview", "/audience/overview", 2)}
-              {menuItem("Analytics Workbench", "Audience/Analytics", "/audience/analyticsdata", 2)}
-              {menuItem("Contents Pathing", "Audience/Contents", "/audience/contents", 2)}
-              {menuItem("Viewer Acquisition", "Audience/Acquisition", "/audience/acquisition", 2)}
-              {menuItem("Viewer Retention", "Audience/Retention", "/audience/retention", 2)}
-              {menuItem("Segment Management", "Audience/Segments", "/audience/segments", 2)}
+              {menuItem("Overview", "Overview", "/audience/overview", 2)}
+              {menuItem("Analytics Workbench", "Analytics", "/audience/analyticsdata", 2)}
+              {menuItem("Contents Pathing", "Contents", "/audience/contents", 2)}
+              {menuItem("Viewer Acquisition", "Acquisition", "/audience/acquisition", 2)}
+              {menuItem("Viewer Retention", "Retention", "/audience/retention", 2)}
+              {menuItem("Segment Management", "Segments", "/audience/segments", 2)}
             </div>
           )}
         </div>
@@ -85,14 +85,14 @@ export default function Sidebar() {
           </div>
           {isHovered && videoOpen && (
             <div className="ml-2 mt-3 mb-3 space-y-1">
-              {menuItem("Trends", "Video/Trends", "/video/trends", 2)}
-              {menuItem("Overview", "Video/Overview", "/video/overview", 2)}
+              {menuItem("Trends", "Trends", "/video/trends", 2)}
+              {menuItem("Overview", "Overview", "/video/overview", 2)}
             </div>
           )}
         </div>
         <div>
-          <div className={`flex items-center justify-between px-4 py-2 rounded-lg cursor-pointer ${selected === "Settings/Settings" ? "bg-[#7da09b]" : "hover:bg-gray-800"}`}>
-            <div onClick={() => handleNavigation("Settings/Settings", "/settings/settings")} className="flex items-center space-x-2">
+          <div className={`flex items-center justify-between px-4 py-2 rounded-lg cursor-pointer ${selected === "Settings" ? "bg-[#7da09b]" : "hover:bg-gray-800"}`}>
+            <div onClick={() => handleNavigation("Settings", "/settings/settings")} className="flex items-center space-x-2">
               <Image src={IC_Setting} alt="Setting Icon"/>
               {isHovered && <span>Setting</span>}
             </div>
