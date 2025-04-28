@@ -30,6 +30,14 @@
   display:flex; flex-direction:column; padding: 0 40px 16px; background-color: #f4f6f8;
   .gridBox {
     display:flex; flex-direction:column; padding:20px; background-color:#FFFFFF; border-radius: 12px;
+    .GridTitle {
+      display:flex; flex-direction:row; justify-content:space-between; align-items:center; padding:4px 0; margin-bottom:16px;
+      .GTLeft {
+        display:flex; flex-direction:row; justify-content:flex-start; align-items:center;
+        strong {display:flex; font-size:18px; line-height:26px; font-weight:600;}
+      }
+      .GTRight {display:flex; flex-direction:row; justify-content:flex-end; align-items:center;}
+    }
   }
 }
 
@@ -40,10 +48,11 @@
 }
 
 .filterBar {
-  display: flex; align-items: center; margin-bottom: 24px; background-color: #28353d; color: white; padding: 16px; border-radius: 4px;
+  display: flex; justify-content:flex-start; align-items: center; margin-bottom: 24px; background-color: #2f332E; color: white; padding: 16px 20px; border-radius: 12px;
   .filterButton {
-    background: none; color: white; border: none; padding: 8px; margin-right: 16px; cursor: pointer;
+    background:#FFFFFF; border:1px solid #e6e6e6; padding:5px; cursor: pointer; border-radius:6px; font-size:0;
   }
+  .filterLine {display:flex; width:1px; height:20px; background-color:#666666; margin:0 16px;}
 }
 
 .searchInput {
@@ -51,7 +60,14 @@
   &::placeholder { color: #ccc; }
 }
 .textButton {
-  background: none; color: white; border: 1px solid #555; padding: 8px 12px; margin-left: 8px; border-radius: 4px; cursor: pointer;
+  background:rgba(255,255,255,0.1); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.5); padding: 5px 11px; margin-right: 8px; border-radius: 6px; cursor: pointer;
+  .gray {color:#b3b3b3}
+}
+.iconTopButton {
+  background:#FFFFFF; font-size:0; color: #FFFFFF; border: 1px solid #e6e6e6; padding: 5px; margin-left: 8px; border-radius: 6px; cursor: pointer;
+}
+.iconButton {
+  background:none; color: #FFFFFF; border: 1px solid transparent; padding: 5px 11px; margin-left: 8px; cursor: pointer;
 }
 .spacer {
   flex-grow: 1;
@@ -60,11 +76,9 @@
   display:inline-flex; justify-content:space-between; align-items:center; padding:6px 12px; border-radius:6px; background-color: #7D9D9C; cursor:pointer;
   span {display:inline-flex; margin-left:4px; font-size:14px; line-height:20px; color:#FFFFFF;}
 }
-.iconButton {
-  background:#FFFFFF; border:none; margin-left:8px; padding:6px; border-radius:6px; cursor:pointer;
-}
 .downloadButton {
-  background: none; color: white; border: none; padding: 8px; margin-left: 16px; cursor: pointer; display: flex; align-items: center;
+  display:inline-flex; justify-content:center; align-items:center; background: none; color: white; border: none; padding: 8px; margin-left: 16px; cursor: pointer; display: flex; align-items: center;
+  img {margin-right:4px;}
 }
 .metricGrid {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px;
