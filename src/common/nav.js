@@ -56,7 +56,7 @@ export default function Sidebar() {
               <Image src={IC_Audience} alt="Audience Icon"/>
               {isHovered && <span>Audience</span>}
             </div>
-            {isHovered && (audienceOpen ? <Image src={IC_ArrowUp}/> : <Image src={IC_ArrowDown}/>)}
+            {isHovered && (audienceOpen ? <Image src={IC_ArrowUp} alt="ArrowUp Icon"/> : <Image src={IC_ArrowDown} alt="ArrowDown Icon"/>)}
           </div>
           {isHovered && audienceOpen && (
             <div className="ml-2 mt-3 mb-3 space-y-1">
@@ -81,7 +81,7 @@ export default function Sidebar() {
               <Image src={IC_Video} alt="Video Icon"/>
               {isHovered && <span>Video</span>}
             </div>
-            {isHovered && (videoOpen ? <Image src={IC_ArrowUp}/> : <Image src={IC_ArrowDown}/>)}
+            {isHovered && (videoOpen ? <Image src={IC_ArrowUp} alt="ArrowUp Icon"/> : <Image src={IC_ArrowDown} alt="ArrowDown Icon"/>)}
           </div>
           {isHovered && videoOpen && (
             <div className="ml-2 mt-3 mb-3 space-y-1">

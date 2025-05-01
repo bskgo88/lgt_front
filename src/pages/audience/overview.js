@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ReactSelect from 'react-select';
-import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar, Dot, Surface, Rectangle} from "recharts";
-import {Button, InputBase, Box, Typography, IconButton, Divider, MenuItem, Select, Paper, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, styled} from "@mui/material";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar, Dot, Surface, Rectangle } from "recharts";
+import { Modal, Button, InputBase, Box, Typography, IconButton, Divider, MenuItem, Select, Paper, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, styled } from "@mui/material";
 import { scaleLinear } from 'd3-scale';
 import { format } from 'date-fns';
 
@@ -28,9 +28,10 @@ import IC_Filter from "@/assets/images/icons/basic/ic_action_sm_bk_filter_n.png"
 import IC_Download from "@/assets/images/icons/basic/ic_action_sm_wt_download_n.png";
 
 import IC_MaxAction from "@/assets/images/icons/action/btn_action_md_bk_maximize_n.png";
+import IC_Date from "@/assets/images/icons/basic/btn_action_md_bk_date_n.png";
+import IC_Close from "@/assets/images/icons/action/btn_action_md_bk_close_n.png";
 
-
-const COLORS = ["#f97316", "#60a5fa", "#34d399", "#c084fc"];
+const COLORS = ["#7D9D9C", "#F3A683", "#A4A07B", "#E9D8A6"];
 
 const dummyLineData = [
   { date: '08.28', UD: 160, Duration: 480, Access: 400 },
@@ -53,13 +54,17 @@ const dummyLineData2 = [
 ];
 
 const dummyPieData = [
-  { name: "webOS 3.0", value: 300 },
-  { name: "webOS 22", value: 200 }
+  { name: "webOS 3.0", value: 210 },
+  { name: "webOS 3.5", value: 85 },
+  { name: "webOS 4.0", value: 50 },
+  { name: "webOS 22", value: 15 }
 ];
 
 const dummyDeviceData = [
-  { name: "LG TV", value: 100 },
-  { name: "Unknown", value: 900 }
+  { name: "LG TV", value: 180 },
+  { name: "WEE1.0", value: 90 },
+  { name: "Smart Monitor", value: 45 },
+  { name: "Unknown", value: 45 }
 ];
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -237,7 +242,7 @@ const Heatmap = () => {
     <Box sx={{ width: '100%', overflowX: 'auto' }}>
       <Grid container sx={{flexDirection:"column" }}>
         {dummyHeatmapData.map((dayData) => (
-          <Grid item xs={12} key={dayData.day} sx={{ display: 'flex', alignItems: 'center'}}>
+          <Grid span={6} key={dayData.day} sx={{ display: 'flex', alignItems: 'center'}}>
             <DayLabel>{dayData.day}</DayLabel>
             {dayData.hourlyData.map((value, index) => (
               <HeatmapGrid key={index} value={value} colorScale={colorScale}>
@@ -286,6 +291,161 @@ const RoundedBar = (props) => {
   );
 };
 
+const ModalCont = ({ handleClose }) => {
+  const [segmentName, setSegmentName] = useState('');
+  const [description, setDescription] = useState('');
+  const [selectedTab, setSelectedTab] = useState('Basic');
+  const [timeRange, setTimeRange] = useState('');
+  const [regionCondition, setRegionCondition] = useState('Is equal to');
+  const [regionSearch, setRegionSearch] = useState('');
+  const [countryCondition, setCountryCondition] = useState(''); // 예시
+  const [countrySearch, setCountrySearch] = useState(''); // 예시
+
+  const tabs = ['Basic', 'Content', 'First Stream', 'Custom Tag'];
+
+  const handleTabClick = (tab) => {
+    setSelectedTab(tab);
+    // 탭에 따른 컨텐츠 변경 로직 (추후 구현)
+    console.log(`${tab} 탭이 선택되었습니다.`);
+  };
+
+  return (
+    <div className="popupContainer">
+      <div className="popupHeader">
+        <h2>Create Segment</h2>
+        <button onClick={handleClose} className="closeButton">
+          <Image src={IC_Close} alt="Close Icon" height={24} width={24} />
+        </button>
+      </div>
+
+      <div className="popupBody">
+        <div className="inputGroup">
+          <label htmlFor="segmentName">Segment Name *</label>
+          <input
+            type="text"
+            id="segmentName"
+            value={segmentName}
+            onChange={(e) => setSegmentName(e.target.value)}
+          />
+        </div>
+
+        <div className="inputGroup">
+          <label htmlFor="description">Description</label>
+          <textarea
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+
+        <div className="categoryTime">
+          <div className="inputGroup">
+            <label htmlFor="categoryTags">Category Tags</label>
+            <input type="text" id="categoryTags" />
+          </div>
+          <div className="inputGroup">
+            <label htmlFor="timeRange">Time Range</label>
+            <div className="timeRangeInput">
+              <input
+                type="text"
+                id="timeRange"
+                placeholder="Select time range"
+                value={timeRange}
+                readOnly
+              />
+              <button onClick={() => console.log('달력')} className="calendarButton">
+                <Image src={IC_Date} alt="date Icon" height={24} width={24} />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="tabButtons">
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              className={selectedTab === tab ? 'activeTab' : ''}
+              onClick={() => handleTabClick(tab)}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+
+        <div className="tabContent">
+          {selectedTab === 'Basic' && (
+            <div>
+              <p>Segment based on content watched. The logic between different dimensions/metrics is AND.</p>
+              <div className="filterGroup">
+                <label htmlFor="region" className="filterLabel">
+                  Region <span className="infoIcon">ⓘ</span>
+                </label>
+                <div className="filterRow">
+                  <select style={{flex:"1 1 100px"}}>
+                    <option>Is equal to</option>
+                  </select>
+                  <select style={{flex:"1 1 60%"}} className="search">
+                    <option className="placeholder" value="" disabled hidden selected>Search to add Region</option>
+                    <option></option>
+                  </select>
+                  <span className="filterOR"><span>OR</span></span>
+                  <button className="removeButton"><span></span></button>
+                </div>
+              </div>
+
+              <div className="filterGroup">
+                <label htmlFor="country" className="filterLabel">
+                  Country <span className="infoIcon">ⓘ</span>
+                </label>
+                {/* Country 필터 UI (예시) */}
+                <div className="filterRow">
+                  <select style={{flex:"1 1 100px"}}>
+                    <option>Is equal to</option>
+                  </select>
+                  <select style={{flex:"1 1 60%"}} className="search">
+                    <option className="placeholder" value="" disabled hidden selected>Search to add Region</option>
+                    <option></option>
+                  </select>
+                  <span className="filterOR"><span>OR</span></span>
+                  <button className="removeButton"><span></span></button>
+                </div>
+              </div>
+              {/* Basic 탭의 다른 컨텐츠 */}
+            </div>
+          )}
+          {selectedTab === 'Content' && (
+            <div>
+              {/* Content 탭의 컨텐츠 */}
+              <p>Content 탭 내용입니다.</p>
+            </div>
+          )}
+          {selectedTab === 'First Stream' && (
+            <div>
+              {/* First Stream 탭의 컨텐츠 */}
+              <p>First Stream 탭 내용입니다.</p>
+            </div>
+          )}
+          {selectedTab === 'Custom Tag' && (
+            <div>
+              {/* Custom Tag 탭의 컨텐츠 */}
+              <p>Custom Tag 탭 내용입니다.</p>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="popupFooter">
+        <button onClick={() => console.log('취소')} className="cancelButton">
+          Cancel
+        </button>
+        <button onClick={() => console.log('확인')} className="okButton">
+          OK
+        </button>
+      </div>
+    </div>
+  );
+};
+
 export default function OverviewPage() {
   const [rows, setRows] = useState([]);
   const [order, setOrder] = useState('asc');
@@ -293,6 +453,11 @@ export default function OverviewPage() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [filter, setFilter] = useState('Program');
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const barRadius = 7; // 바 차트 상단 둥글게
 
@@ -433,42 +598,6 @@ export default function OverviewPage() {
     [sortedRows, page, rowsPerPage]
   );
 
-  const CustomGrid = ({ x, y, width, height, xAxis, yAxis }) => {
-    const ticks = xAxis?.ticks || [];
-
-    return (
-      <g className="recharts-cartesian-grid">
-        {/* 가로선은 그대로 그리기 */}
-        {yAxis?.ticks?.map((entry, index) => (
-          <line
-            key={`y-grid-${index}`}
-            x1={0}
-            y1={entry.coordinate}
-            x2={width}
-            y2={entry.coordinate}
-            stroke="#eee"
-            strokeDasharray="3 3"
-          />
-        ))}
-        {/* 세로선은 가운데만 그림 (맨 처음/마지막 제외) */}
-        {ticks.map((entry, index) => {
-          if (index === 0 || index === ticks.length - 1) return null;
-          return (
-            <line
-              key={`x-grid-${index}`}
-              x1={entry.coordinate}
-              y1={0}
-              x2={entry.coordinate}
-              y2={height}
-              stroke="#eee"
-              strokeDasharray="3 3"
-            />
-          );
-        })}
-      </g>
-    );
-  };
-
   return (
     <Box sx={{ display: "flex", bgcolor: "#f5f5f2", flexDirection:"column"}}>
       <Box className="overviewContainer">
@@ -477,9 +606,14 @@ export default function OverviewPage() {
             <strong className="overviewTitle">Overview Page</strong>
           </div>
           <div className="RightCont">
-            <button className="createSegmentButton">
+            <button className="createSegmentButton" onClick={handleOpen}>
               <Image src={IC_Add} alt="Add Icon" height={20} width={20} /> <span>Create a new segment</span>
             </button>
+            <Modal open={open} onClose={handleClose} className="CustomModalBox">
+              <div className="CustomModal">
+                <ModalCont handleClose={handleClose}/>
+              </div>
+            </Modal>
             <ReactSelect
               options={options}
               styles={customStyles}
@@ -505,7 +639,7 @@ export default function OverviewPage() {
           <button className="filterButton">
             <Image style={{display:'inline-block'}} src={IC_Filter} alt="Add Icon" height={20} width={20} />
           </button>
-          <span class="filterLine"></span>
+          <span className="filterLine"></span>
           <button className="textButton">United States <span className="gray">+1 other</span></button>
           <button className="textButton">Text</button>
           <button className="textButton">Text</button>
@@ -534,7 +668,7 @@ export default function OverviewPage() {
                 <Image src={IC_MaxAction} alt="Add Icon" height={24} width={24} />
               </div>
             </div>
-            <ResponsiveContainer width="100%" height={250}>
+            <ResponsiveContainer width="100%" height={300}>
               <LineChart data={dummyLineData} margin={{ top: 20, right: 5, left: 0, bottom: 5 }}>
                 <CartesianGrid stroke="#e6e6e6" strokeDasharray="0 0" />
                 <XAxis
@@ -620,7 +754,7 @@ export default function OverviewPage() {
                 <Image src={IC_MaxAction} alt="Add Icon" height={24} width={24} />
               </div>
             </div>
-            <ResponsiveContainer width="100%" height={250}>
+            <ResponsiveContainer width="100%" height={300}>
               <LineChart data={dummyLineData2} margin={{ top: 20, right: 5, left: 0, bottom: 5 }}>
                 <CartesianGrid stroke="#e6e6e6" strokeDasharray="0" />
                 <XAxis
@@ -715,9 +849,19 @@ export default function OverviewPage() {
                 <Image src={IC_MaxAction} alt="Add Icon" height={24} width={24} />
               </div>
             </div>
-            <ResponsiveContainer width="100%" height={250}>
+            <ResponsiveContainer width="100%" height={300}>
               <PieChart>
-                <Pie data={dummyPieData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={60} label>
+                <Pie
+                  data={dummyPieData}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={85} // 도넛 차트 중심 구멍
+                  outerRadius={100}
+                  startAngle={90}
+                  endAngle={-270}
+                >
                   {dummyPieData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
@@ -732,6 +876,11 @@ export default function OverviewPage() {
                   formatter={(value, entry, index) => (
                     <span style={{color: entry.color, border:"1px solid #f2f2f2", padding:"5px 11px", borderRadius:"14px"}}>● <span style={{color:"#1a1a1a"}}>{value}</span></span>
                   )}
+                />
+                <Tooltip
+                  formatter={(value, name) => [`${value}`, `${name}`]}
+                  contentStyle={{ fontSize: '12px', borderRadius: '8px' }}
+                  cursor={{ fill: 'rgba(0, 0, 0, 0.05)' }}
                 />
                 {legendBBox && (
                     <Surface>
@@ -761,13 +910,28 @@ export default function OverviewPage() {
                 <Image src={IC_MaxAction} alt="Add Icon" height={24} width={24} />
               </div>
             </div>
-            <ResponsiveContainer width="100%" height={250}>
+            <ResponsiveContainer width="100%" height={300}>
               <PieChart>
-                <Pie data={dummyDeviceData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={60} label>
+              <Pie
+                  data={dummyDeviceData}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={85} // 도넛 차트 중심 구멍
+                  outerRadius={100}
+                  startAngle={90}
+                  endAngle={-270}
+                >
                   {dummyDeviceData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
+                <Tooltip
+                  formatter={(value, name) => [`${value}`, `${name}`]}
+                  contentStyle={{ fontSize: '12px', borderRadius: '8px' }}
+                  cursor={{ fill: 'rgba(0, 0, 0, 0.05)' }}
+                />
                 <Legend
                   ref={legendRef}
                   iconSize={0}
@@ -807,7 +971,7 @@ export default function OverviewPage() {
                 <Image src={IC_MaxAction} alt="Add Icon" height={24} width={24} />
               </div>
             </div>
-            <ResponsiveContainer width="100%" height={250}>
+            <ResponsiveContainer width="100%" height={300}>
             <BarChart
                 data={data}
                 margin={{ top: 20, right: 5, left: 0, bottom: 5 }}
@@ -877,7 +1041,7 @@ export default function OverviewPage() {
                 <Image src={IC_MaxAction} alt="Add Icon" height={24} width={24} />
               </div>
             </div>
-            <ResponsiveContainer width="100%" height={250}>
+            <ResponsiveContainer width="100%" height={300}>
               <BarChart
                 data={data}
                 margin={{ top: 20, right: 5, left: 0, bottom: 5 }}
