@@ -113,30 +113,19 @@
 .popupContainer {
   background-color: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); padding:20px; width:100%; /* 적절한 너비 설정 */
   .popupHeader {
-    display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;
-
-    h2 {
-      margin: 0;
-      font-size: 1.5rem;
-    }
-
+    display: flex; justify-content: space-between; align-items: center; margin-bottom:32px;
+    .pHTitle {display:flex; font-size:18px; line-height:26px; color:#1a1a1a; font-weight:600;}
     .closeButton {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 1.2rem;
-      color: #555;
+      background: none; border: none; cursor: pointer; font-size: 1.2rem; color: #555;
     }
   }
 
   .popupBody {
-    margin-bottom: 20px;
-
+    display:flex; width:100%; flex-direction:column; margin-bottom:32px;
     .inputGroup {
       margin-bottom: 15px;
 
-      label {
-        display: block;
+      label {display: block;
         margin-bottom: 5px;
         font-weight: bold;
         color: #333;
@@ -167,69 +156,61 @@
     }
 
     .timeRangeInput {
-      display: flex;
-      align-items: center;
-
-      input[type="text"] {
-        flex-grow: 1;
-        margin-right: 10px;
-      }
-
-      .calendarButton {
-        background: none;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        padding: 8px;
-        cursor: pointer;
-        color: #555;
-      }
+      display: flex; align-items: center; position:relative;
+      input[type="text"] {flex-grow: 1; padding-right:35px;}
+      .inpitImg {position:absolute; top:calc(50% - 12px); right:7px;}
     }
 
     .tabButtons {
-      display: flex;
-      margin-bottom: 15px;
-      border-bottom: 2px solid #eee;
-
+      display: flex; margin-bottom: 16px; border:1px solid #e6e6e6; border-radius:6px; overflow:hidden;
       button {
-        background: none;
-        border: none;
-        padding: 10px 15px;
-        cursor: pointer;
-        font-size: 1rem;
-        color: #555;
-
+        flex:1 1 20%; font-size:14px; line-height:20px; font-weight:500; color:#666666; padding:8px; border-right:1px solid #e6e6e6; background-color:#FFFFFF; cursor:pointer;
+        &:last-of-type {border-right:none;}
         &.activeTab {
-          color: #007bff;
-          border-bottom: 2px solid #007bff;
+          color:#FFFFFF; background-color:#2F332E; border:none;
         }
       }
     }
 
     .tabContent {
-      padding: 15px 0;
-
+      padding:0; display:flex; width:100%;
+      .tabInCont {display:flex; width:100%; flex-direction:column; justify-content:flex-start; align-items:flex-start;}
+      .tcTitle {display:flex; margin-bottom:32px; font-size:12px; line-height:16px; color:#666666; font-weight:400;}
       .filterGroup {
-        margin-bottom: 15px;
-
+        display:flex; flex-direction:column; width:100%; margin-bottom:32px;
+        &:last-of-type {margin-bottom:0;}
         .filterLabel {
-          display: block;
-          margin-bottom: 5px;
-          font-weight: bold;
-          color: #333;
+          display:flex; flex-direction:row; justify-content:flex-start; align-items:center; margin-bottom:8px; font-size:14px; line-height:20px; font-weight:600; color:#1a1a1a;
         }
-
         .filterRow {display:flex; gap:10px; align-items:center;
-          select {
-            display:inline-flex; padding:8px 32px 8px 16px; border: 1px solid #e6e6e6; border-radius:8px; font-size:14px; appearance: none; background-size: 20px;
-            background:url('../assets/images/icons/basic/ic_basic_sm_bk_caret_down_n.png') calc(100% - 16px) center no-repeat;
-            &:focus {background:url('../assets/images/icons/basic/ic_basic_sm_bk_caret_up_n.png') calc(100% - 16px) center no-repeat;}
-            &.search {
-              color:#B3B3B3;
-              background-image:url('../assets/images/icons/basic/ic_basic_sm_bk_caret_down_n.png'),url('../assets/images/icons/basic/btn_action_md_bk_search_n.png');
-              background-position:calc(100% - 16px) center,16px center;
-              background-size:20px 20px, 24px 24px;
-              background-repeat:no-repeat;
-              padding-left:50px;
+          .conditionSelect {
+            .MuiSelect-select {
+              padding:7px 32px 7px 15px; border: 1px solid #e6e6e6; border-radius:8px; font-size:14px; appearance: none; background-size: 20px;
+              background:url('../assets/images/icons/basic/ic_basic_sm_bk_caret_down_n.png') calc(100% - 16px) center no-repeat;
+            }
+            .MuiSelect-icon {opacity:0; pointer-events:none;}
+            &.Open {
+              .MuiSelect-select {
+                background:url('../assets/images/icons/basic/ic_basic_sm_bk_caret_up_n.png') calc(100% - 16px) center no-repeat;
+              }
+            }
+            &.Search {
+              .MuiSelect-select {
+                padding-left:50px;
+                background-position:calc(100% - 16px) center,16px center;
+                background-size:20px 20px, 24px 24px;
+                background-repeat:no-repeat;
+                background-image:url('../assets/images/icons/basic/ic_basic_sm_bk_caret_down_n.png'),url('../assets/images/icons/basic/btn_action_md_bk_search_n.png');
+              }
+              &.Open {
+                .MuiSelect-select{
+                  background-image:url('../assets/images/icons/basic/ic_basic_sm_bk_caret_up_n.png'),url('../assets/images/icons/basic/btn_action_md_bk_search_n.png');
+                }
+              }
+              .placeholder {color:#b3b3b3; font-size:14px;}
+            }
+            .MuiList-root {
+              display:flex; flex-direction:column;
             }
           }
           .filterOR {
@@ -243,39 +224,263 @@
               &:after {content:""; display:flex; width:13px; height:1px; background-color:#e6e6e6;}
             }
           }
+          .regionSearch {
+            flex: 1 1 60%;
+        
+            .placeholder {
+              color: #aaa;
+            }
+        
+            .MuiInputBase-root {
+              padding-right: 32px; /* RemoveIcon 공간 확보 */
+            }
+          }
         }
         .infoIcon {
-          color: #007bff;
-          font-size: 0.9rem;
-          margin-left: 5px;
+          color: #007bff; font-size: 0.9rem; margin-left: 5px;
         }
       }
     }
   }
 
   .popupFooter {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
+    display: flex; justify-content: flex-end; gap: 10px;
+    .cancelButton, .okButton {padding: 9px 15px; border-radius: 6px; font-size:14px; line-height:20px; font-weight:500; min-width:100px;}
+    .cancelButton {border: 1px solid #e6e6e6; background-color: #FFFFFF; color: #1a1a1a;}
+    .okButton {background-color: #2f332E; color: #FFFFFF; border:1px solid #2f332E;}
+  }
+}
 
-    .cancelButton,
-    .okButton {
-      padding: 10px 20px;
-      border-radius: 4px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
+.timeRangeInput {
+  position: relative; /* datePickerContainer의 기준 위치 설정 */
+  display: flex;
+  align-items: center;
+}
 
-    .cancelButton {
-      background-color: #f0f0f0;
-      color: #333;
-      border: 1px solid #ccc;
-    }
+.datePickerContainer {
+  position: absolute;
+  top: 100%; /* 입력 필드 바로 아래 */
+  left: 0;
+  z-index: 10; /* 다른 요소 위에 표시 */
+  background-color: #fff; /* 배경색 */
+  border: 1px solid #ccc; /* 테두리 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
 
-    .okButton {
-      background-color: #007bff;
-      color: #fff;
-      border: none;
+.calendarButton {
+  margin-left: 8px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.timeRangeInput {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.datePickerPopupWrapper {
+  position: absolute; top:calc(100% + 10px); left: 0; z-index: 100; background-color: #FFFFFF; border: 1px solid #e6e6e6; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); padding: 32px 28px; border-radius:8px;
+}
+
+.datePickerPopup .quickSelectButtons {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.datePickerPopup .quickSelectButtons button {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.datePickerPopup .react-datepicker-wrapper {
+  width: auto !important; /* 인라인 달력 너비 조정 */
+}
+
+.datePickerPopup .datePickerFooter {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.datePickerPopup .datePickerFooter button {
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.datePickerPopup .datePickerFooter .resetButton {
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+.datePickerPopup .datePickerFooter .okButton {
+  background-color: #1c7ed6;
+  color: white;
+  border: none;
+}
+
+.calendarButton {
+  margin-left: 8px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.datePickerPopup.twoCalendars {
+  .quickSelectButtons {
+    display: flex; gap: 6px; margin-bottom: 32px;
+    button {
+      padding: 5px 11px; border: 1px solid #e6e6e6; border-radius: 6px; background-color: #ffffff; cursor: pointer; font-size:14px; line-height:20px; font-weight:500;
     }
   }
+  .calendarsContainer {
+    display: flex;
+    gap: 20px; /* 달력 사이 간격 */
+  }
+  .lineCenter {
+    display:flex; width:1px; height:auto; background-color:#e6e6e6; margin:0 20px;
+  }
+  .singleCalendar {
+    width: auto;
+  }
+  .react-datepicker {
+    display: flex; /* 달력들을 가로로 배치 */
+    gap: 20px; /* 달력 사이 간격 */
+    border: none;
+  }
+
+  .react-datepicker__month-container {
+    width: auto !important;
+  }
+
+  .react-datepicker__header {
+    background-color: transparent;
+    border-bottom: none;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .react-datepicker__day-names {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 8px;
+  }
+
+  .react-datepicker__day-name {
+    color: #888;
+    font-size: 0.8rem;
+    width: 30px;
+    text-align: center;
+  }
+
+  .react-datepicker__month {
+    margin: 0;
+  }
+
+  .react-datepicker__week {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .react-datepicker__day,
+  .react-datepicker__day--030,
+  .react-datepicker__day--031 {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #333;
+    background-color: transparent;
+    border: none;
+    outline: none;
+
+    &--selected,
+    &--in-range {
+      background-color: #d9f0e7;
+      color: #333;
+    }
+
+    &--highlighted {
+      background-color: #a6d9c5;
+      color: #333;
+    }
+
+    &--outside-month {
+      color: #ccc;
+    }
+  }
+
+  .customHeader {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 0 10px;
+    .cHcenter {display:flex; flex-direction:row; justify-content:center; align-items:center; font-size:16px; line-height:24px; font-weight:600; color:#1a1a1a;}
+    .cHLeft {display:flex; flex-direction:row; justify-content:flex-start; align-items:center;}
+    .cHRight {display:flex; flex-direction:row; justify-content:flex-end; align-items:center;}
+    button {
+      background: none; border: none; padding: 5px; cursor: pointer; font-size: 1rem; color: #555;
+      &:disabled {
+        color: #ccc; cursor: not-allowed;
+      }
+      &.prevYear,
+      &.nextYear {
+        font-size: 0.8rem; font-weight: bold;
+      }
+    }
+  }
+
+  .datePickerFooter {
+    display: flex; justify-content: flex-end; margin-top: 20px; gap: 10px;
+    button {
+      padding:5px 11px; border-radius:6px; cursor: pointer; font-size:14px; line-height:20px; font-weight:500; min-width:64px;
+    }
+    .resetButton {border: 1px solid #e6e6e6; background-color: #FFFFFF; color: #1a1a1a;}
+    .okButton {background-color: #2f332E; color: #FFFFFF; border:1px solid #2f332E;}
+  }
+}
+
+.CustomList {
+  display:flex; flex-direction:column; padding:7px ; box-shadow:none !important; border:1px solid #e6e6e6; border-radius:6px !important;
+  .CustomListBox {
+    display:flex; flex-direction:column; padding:0;
+  }
+  .Mui-selected {border-radius:6px !important; background-color:#78B4AF1A !important; color:#6E9794;}
+  .MuiButtonBase-root:hover {border-radius:6px !important; background-color:#78B4AF2b !important;}
+}
+
+.custom-tooltip-wrapper {
+  display:flex; justify-content:center; align-items:center; margin-left:10px;
+  img {width:20px; height:20px;}
+}
+
+.custom-tooltip {
+  .MuiTooltip-tooltip{
+    background-color:rgba(0,0,0,0.85);
+  }
+  .MuiTooltip-arrow {
+    &::before {color:rgba(0,0,0,0.85);}
+  }
+}
+
+.tooltip-content {
+  display:flex; position:relative; padding:8px 40px 8px 16px;
+  span {
+    display:block; word-break:keep-all; font-size:12px; line-height:16px; font-weight:400; color:#cccccc;
+  }
+  .close-button {position:absolute; top:8px; right:8px; cursor:pointer;}
 }
