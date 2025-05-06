@@ -4,10 +4,12 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { Modal, Button, InputBase, Box, Typography, IconButton, Divider, MenuItem, Select, Paper, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, styled } from "@mui/material";
 import { scaleLinear } from 'd3-scale';
 import { format } from 'date-fns';
+import Image from 'next/image';
+
+import ModalCont from '@/pages/audience/modal/modal';
 
 import CustomTablePagination from '@/common/paging'; // CustomTablePagination import
 
-import Image from 'next/image';
 import IC_Save from "@/assets/images/icons/basic/ic_action_sm_bk_save_n.png";
 import IC_Link from "@/assets/images/icons/basic/ic_action_sm_bk_link_n.png";
 import IC_Add from "@/assets/images/icons/basic/ic_action_sm_wt_add_n.png";
@@ -28,8 +30,6 @@ import IC_Filter from "@/assets/images/icons/basic/ic_action_sm_bk_filter_n.png"
 import IC_Download from "@/assets/images/icons/basic/ic_action_sm_wt_download_n.png";
 
 import IC_MaxAction from "@/assets/images/icons/action/btn_action_md_bk_maximize_n.png";
-import IC_Date from "@/assets/images/icons/basic/btn_action_md_bk_date_n.png";
-import IC_Close from "@/assets/images/icons/action/btn_action_md_bk_close_n.png";
 
 const COLORS = ["#7D9D9C", "#F3A683", "#A4A07B", "#E9D8A6"];
 
@@ -176,14 +176,6 @@ const HeatmapGrid = styled(Paper)(({ value, colorScale }) => ({
   boxShadow:'none',
 }));
 
-const TimeLabel = styled(Typography)(({ isDayLabel }) => ({
-  width: 'calc(100% / 24)',
-  textAlign: 'center',
-  fontSize: '0.7rem',
-  color: '#666',
-  paddingTop: isDayLabel ? '8px' : '0',
-}));
-
 const DayLabel = styled(Typography)(({ theme }) => ({
   width: '60px',
   textAlign: 'right',
@@ -288,161 +280,6 @@ const RoundedBar = (props) => {
           Z`}
       fill={fill}
     />
-  );
-};
-
-const ModalCont = ({ handleClose }) => {
-  const [segmentName, setSegmentName] = useState('');
-  const [description, setDescription] = useState('');
-  const [selectedTab, setSelectedTab] = useState('Basic');
-  const [timeRange, setTimeRange] = useState('');
-  const [regionCondition, setRegionCondition] = useState('Is equal to');
-  const [regionSearch, setRegionSearch] = useState('');
-  const [countryCondition, setCountryCondition] = useState(''); // 예시
-  const [countrySearch, setCountrySearch] = useState(''); // 예시
-
-  const tabs = ['Basic', 'Content', 'First Stream', 'Custom Tag'];
-
-  const handleTabClick = (tab) => {
-    setSelectedTab(tab);
-    // 탭에 따른 컨텐츠 변경 로직 (추후 구현)
-    console.log(`${tab} 탭이 선택되었습니다.`);
-  };
-
-  return (
-    <div className="popupContainer">
-      <div className="popupHeader">
-        <h2>Create Segment</h2>
-        <button onClick={handleClose} className="closeButton">
-          <Image src={IC_Close} alt="Close Icon" height={24} width={24} />
-        </button>
-      </div>
-
-      <div className="popupBody">
-        <div className="inputGroup">
-          <label htmlFor="segmentName">Segment Name *</label>
-          <input
-            type="text"
-            id="segmentName"
-            value={segmentName}
-            onChange={(e) => setSegmentName(e.target.value)}
-          />
-        </div>
-
-        <div className="inputGroup">
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
-
-        <div className="categoryTime">
-          <div className="inputGroup">
-            <label htmlFor="categoryTags">Category Tags</label>
-            <input type="text" id="categoryTags" />
-          </div>
-          <div className="inputGroup">
-            <label htmlFor="timeRange">Time Range</label>
-            <div className="timeRangeInput">
-              <input
-                type="text"
-                id="timeRange"
-                placeholder="Select time range"
-                value={timeRange}
-                readOnly
-              />
-              <button onClick={() => console.log('달력')} className="calendarButton">
-                <Image src={IC_Date} alt="date Icon" height={24} width={24} />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="tabButtons">
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              className={selectedTab === tab ? 'activeTab' : ''}
-              onClick={() => handleTabClick(tab)}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
-
-        <div className="tabContent">
-          {selectedTab === 'Basic' && (
-            <div>
-              <p>Segment based on content watched. The logic between different dimensions/metrics is AND.</p>
-              <div className="filterGroup">
-                <label htmlFor="region" className="filterLabel">
-                  Region <span className="infoIcon">ⓘ</span>
-                </label>
-                <div className="filterRow">
-                  <select style={{flex:"1 1 100px"}}>
-                    <option>Is equal to</option>
-                  </select>
-                  <select style={{flex:"1 1 60%"}} className="search">
-                    <option className="placeholder" value="" disabled hidden selected>Search to add Region</option>
-                    <option></option>
-                  </select>
-                  <span className="filterOR"><span>OR</span></span>
-                  <button className="removeButton"><span></span></button>
-                </div>
-              </div>
-
-              <div className="filterGroup">
-                <label htmlFor="country" className="filterLabel">
-                  Country <span className="infoIcon">ⓘ</span>
-                </label>
-                {/* Country 필터 UI (예시) */}
-                <div className="filterRow">
-                  <select style={{flex:"1 1 100px"}}>
-                    <option>Is equal to</option>
-                  </select>
-                  <select style={{flex:"1 1 60%"}} className="search">
-                    <option className="placeholder" value="" disabled hidden selected>Search to add Region</option>
-                    <option></option>
-                  </select>
-                  <span className="filterOR"><span>OR</span></span>
-                  <button className="removeButton"><span></span></button>
-                </div>
-              </div>
-              {/* Basic 탭의 다른 컨텐츠 */}
-            </div>
-          )}
-          {selectedTab === 'Content' && (
-            <div>
-              {/* Content 탭의 컨텐츠 */}
-              <p>Content 탭 내용입니다.</p>
-            </div>
-          )}
-          {selectedTab === 'First Stream' && (
-            <div>
-              {/* First Stream 탭의 컨텐츠 */}
-              <p>First Stream 탭 내용입니다.</p>
-            </div>
-          )}
-          {selectedTab === 'Custom Tag' && (
-            <div>
-              {/* Custom Tag 탭의 컨텐츠 */}
-              <p>Custom Tag 탭 내용입니다.</p>
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div className="popupFooter">
-        <button onClick={() => console.log('취소')} className="cancelButton">
-          Cancel
-        </button>
-        <button onClick={() => console.log('확인')} className="okButton">
-          OK
-        </button>
-      </div>
-    </div>
   );
 };
 
