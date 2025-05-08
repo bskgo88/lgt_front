@@ -7,6 +7,7 @@ import { format } from 'date-fns';
 import Image from 'next/image';
 
 import ModalCont from '@/pages/audience/modal/modal';
+import FilterPopup from '@/pages/audience/modal/filter';
 
 import CustomTablePagination from '@/common/paging'; // CustomTablePagination import
 
@@ -292,9 +293,12 @@ export default function OverviewPage() {
   const [filter, setFilter] = useState('Program');
 
   const [open, setOpen] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleFilterButtonClick = () => {setIsPopupOpen(true);};
+  const handleClosePopup = () => {setIsPopupOpen(false);};
 
   const barRadius = 7; // 바 차트 상단 둥글게
 
@@ -473,9 +477,11 @@ export default function OverviewPage() {
         </div>
 
         <div className="filterBar">
-          <button className="filterButton">
+          <button className="filterButton" onClick={handleFilterButtonClick}>
             <Image style={{display:'inline-block'}} src={IC_Filter} alt="Add Icon" height={20} width={20} />
           </button>
+          {/* 팝업 컴포넌트 */}
+          <FilterPopup isOpen={isPopupOpen} onClose={handleClosePopup} />
           <span className="filterLine"></span>
           <button className="textButton">United States <span className="gray">+1 other</span></button>
           <button className="textButton">Text</button>
