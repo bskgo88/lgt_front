@@ -211,8 +211,7 @@ export default function ModalCont ({ handleClose }) {
                       </MenuItem>
                     ))}
                   </Select>
-                  <TextField
-                    select
+                  <Select
                     className={`conditionSelect Search ${isOpen2 ? 'Open' : ''}`}
                     style={{flex:"1 1 60%"}}
                     value={region}
@@ -220,22 +219,21 @@ export default function ModalCont ({ handleClose }) {
                     onOpen={selectOpen2}
                     onClose={selectClose2}
                     onChange={handleRegionChange}
-                    SelectProps={{
-                      displayEmpty: true,
-                      renderValue: (selected) => {
-                        if (selected.length === 0) {
-                          return <span className="placeholder">Search to add Region</span>;
-                        }
-                        return selected;
-                      },
+                    MenuProps={menuProps}
+                    renderValue={(selected) => {
+                      if (selected === '') {
+                        return <div className="placeholder">Search to add Region</div>; // Placeholder 텍스트
+                      }
+                      return selected;
                     }}
+                    displayEmpty
                   >
                     {regionOptions.map((option) => (
                       <MenuItem key={option} value={option}>
                         {option}
                       </MenuItem>
                     ))}
-                  </TextField>
+                  </Select>
                   <span className="filterOR"><span>OR</span></span>
                   <button className="removeButton"><span></span></button>
                 </div>
