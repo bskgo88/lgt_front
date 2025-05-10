@@ -1,36 +1,16 @@
 import React, { useRef, useEffect, useState } from 'react';
+import Image from 'next/image';
 import ReactSelect from 'react-select';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar, Dot, Surface, Rectangle } from "recharts";
 import { Modal, Button, InputBase, Box, Typography, IconButton, Divider, MenuItem, Select, Paper, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, styled } from "@mui/material";
 import { scaleLinear } from 'd3-scale';
 import { format } from 'date-fns';
-import Image from 'next/image';
 
 import ModalCont from '@/pages/audience/modal/modal';
 import FilterPopup from '@/pages/audience/modal/filter';
 
 import CustomTablePagination from '@/common/paging'; // CustomTablePagination import
-
-import IC_Save from "@/assets/images/icons/basic/ic_action_sm_bk_save_n.png";
-import IC_Link from "@/assets/images/icons/basic/ic_action_sm_bk_link_n.png";
-import IC_Add from "@/assets/images/icons/basic/ic_action_sm_wt_add_n.png";
-import IC_ArrowDown from "@/assets/images/icons/basic/ic_basic_sm_bk_caret_down_n.png";
-import IC_ArrowUp from "@/assets/images/icons/basic/ic_basic_sm_bk_caret_up_n.png";
-
-import IC_ArrowTrDown from "@/assets/images/icons/trend/ic_trend_down.png";
-import IC_ArrowTrUp from "@/assets/images/icons/trend/ic_trend_up.png";
-
-import IC_ArrowCTrDown from "@/assets/images/icons/trend/ic_circle_trend_down.png";
-import IC_ArrowCTrUp from "@/assets/images/icons/trend/ic_circle_trend_up.png";
-
-import IC_SortDe from "@/assets/images/icons/trend/ic_sort_default.png";
-import IC_SortAsc from "@/assets/images/icons/trend/ic_sort_ascending.png";
-import IC_SortDesc from "@/assets/images/icons/trend/ic_sort_descending.png";
-
-import IC_Filter from "@/assets/images/icons/basic/ic_action_sm_bk_filter_n.png";
-import IC_Download from "@/assets/images/icons/basic/ic_action_sm_wt_download_n.png";
-
-import IC_MaxAction from "@/assets/images/icons/action/btn_action_md_bk_maximize_n.png";
+import { IC_Save, IC_Link, IC_Add, IC_ArrowDown, IC_ArrowUp, IC_Filter, IC_Download, IC_MaxAction, IC_ArrowTrDown, IC_ArrowTrUp, IC_ArrowCTrDown, IC_ArrowCTrUp, IC_SortDe, IC_SortAsc, IC_SortDesc } from '@/common/icons';
 
 const COLORS = ["#7D9D9C", "#F3A683", "#A4A07B", "#E9D8A6"];
 
@@ -440,7 +420,7 @@ export default function OverviewPage() {
   );
 
   return (
-    <Box sx={{ display: "flex", bgcolor: "#f5f5f2", flexDirection:"column"}}>
+    <Box className="contFullBox">
       <Box className="overviewContainer">
         <div className="overTop">
           <div className="LeftCont">
