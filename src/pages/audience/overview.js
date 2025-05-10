@@ -10,7 +10,10 @@ import ModalCont from '@/pages/audience/modal/modal';
 import FilterPopup from '@/pages/audience/modal/filter';
 
 import CustomTablePagination from '@/common/paging'; // CustomTablePagination import
-import { IC_Save, IC_Link, IC_Add, IC_ArrowDown, IC_ArrowUp, IC_Filter, IC_Download, IC_MaxAction, IC_ArrowTrDown, IC_ArrowTrUp, IC_ArrowCTrDown, IC_ArrowCTrUp, IC_SortDe, IC_SortAsc, IC_SortDesc } from '@/common/icons';
+import {
+  IC_Save, IC_Link, IC_Add, IC_ArrowDown, IC_ArrowUp, IC_Filter, IC_Download, IC_MaxAction, IC_ArrowTrDown, IC_ArrowTrUp, IC_ArrowCTrDown, IC_ArrowCTrUp, IC_SortDe, IC_SortAsc, IC_SortDesc,
+  IC_Layout1,
+} from '@/common/icons';
 
 const COLORS = ["#7D9D9C", "#F3A683", "#A4A07B", "#E9D8A6"];
 
@@ -427,8 +430,43 @@ export default function OverviewPage() {
             <strong className="overviewTitle">Overview Page</strong>
           </div>
           <div className="RightCont">
+            <button className="iconTopButton">
+              <Image src={IC_Save} alt="Save Icon" height={20} width={20} />
+            </button>
+            <button className="iconTopButton">
+              <Image src={IC_Link} alt="Link Icon" height={20} width={20} />
+            </button>
+            <button className="iconTopButton">
+              <Image src={IC_Download} alt="Add Icon" height={20} width={20} />
+            </button>
+          </div>
+        </div>
+
+        <div className="filterBar">
+          <button className="filterButton" onClick={handleFilterButtonClick}>
+            <Image style={{display:'inline-block'}} src={IC_Filter} alt="Add Icon" height={20} width={20} />
+          </button>
+          {/* 팝업 컴포넌트 */}
+          <FilterPopup isOpen={isPopupOpen} onClose={handleClosePopup} />
+          <span className="filterLine"></span>
+          <button className="textButton">United States <span className="gray">+1 other</span></button>
+          <button className="textButton">Text</button>
+          <button className="textButton">Text</button>
+          <button className="textButton">Text</button>
+          <div className="spacer" />
+        </div>
+
+        <div className="layoutBar">
+          <div className="layoutBox">
+            <strong>Layout</strong>
+            <button className="layoubtn">
+              <Image src={IC_Layout1} alt="Add Icon" height={20} width={20} />
+              <Image src={IC_ArrowDown} alt="Add Icon" height={20} width={20} />
+            </button>
+          </div>
+          <div className="btnBox">
             <button className="createSegmentButton" onClick={handleOpen}>
-              <Image src={IC_Add} alt="Add Icon" height={20} width={20} /> <span>Create a new segment</span>
+              <Image src={IC_Add} alt="Add Icon" height={20} width={20} /><span>Create a new segment</span>
             </button>
             <Modal open={open} onClose={handleClose} className="CustomModalBox">
               <div className="CustomModal">
@@ -447,30 +485,7 @@ export default function OverviewPage() {
               onMenuOpen={() => setIsMenuOpen(true)}
               onMenuClose={() => setIsMenuOpen(false)}
             />
-            <button className="iconTopButton">
-              <Image src={IC_Save} alt="Save Icon" height={20} width={20} />
-            </button>
-            <button className="iconTopButton">
-              <Image src={IC_Link} alt="Link Icon" height={20} width={20} />
-            </button>
           </div>
-        </div>
-
-        <div className="filterBar">
-          <button className="filterButton" onClick={handleFilterButtonClick}>
-            <Image style={{display:'inline-block'}} src={IC_Filter} alt="Add Icon" height={20} width={20} />
-          </button>
-          {/* 팝업 컴포넌트 */}
-          <FilterPopup isOpen={isPopupOpen} onClose={handleClosePopup} />
-          <span className="filterLine"></span>
-          <button className="textButton">United States <span className="gray">+1 other</span></button>
-          <button className="textButton">Text</button>
-          <button className="textButton">Text</button>
-          <button className="textButton">Text</button>
-          <div className="spacer" />
-          <button className="downloadButton">
-            <Image src={IC_Download} alt="Add Icon" height={20} width={20} /> Download as Date
-          </button>
         </div>
 
         <div className="metricGrid">
@@ -492,7 +507,7 @@ export default function OverviewPage() {
               </div>
             </div>
             <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={dummyLineData} margin={{ top: 20, right: 5, left: 0, bottom: 5 }}>
+              <LineChart data={dummyLineData} margin={{ top: 60, right: 5, left: 0, bottom: 5 }}>
                 <CartesianGrid stroke="#e6e6e6" strokeDasharray="0 0" />
                 <XAxis
                   dataKey="date"
@@ -578,7 +593,7 @@ export default function OverviewPage() {
               </div>
             </div>
             <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={dummyLineData2} margin={{ top: 20, right: 5, left: 0, bottom: 5 }}>
+              <LineChart data={dummyLineData} margin={{ top: 60, right: 5, left: 0, bottom: 5 }}>
                 <CartesianGrid stroke="#e6e6e6" strokeDasharray="0" />
                 <XAxis
                   dataKey="date"
@@ -673,7 +688,7 @@ export default function OverviewPage() {
               </div>
             </div>
             <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
+              <PieChart margin={{ top: 60, right: 5, left: 0, bottom: 5 }}>
                 <Pie
                   data={dummyPieData}
                   dataKey="value"
@@ -734,7 +749,7 @@ export default function OverviewPage() {
               </div>
             </div>
             <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
+              <PieChart margin={{ top: 60, right: 5, left: 0, bottom: 5 }}>
               <Pie
                   data={dummyDeviceData}
                   dataKey="value"
@@ -797,7 +812,7 @@ export default function OverviewPage() {
             <ResponsiveContainer width="100%" height={300}>
             <BarChart
                 data={data}
-                margin={{ top: 20, right: 5, left: 0, bottom: 5 }}
+                margin={{ top: 60, right: 5, left: 0, bottom: 5 }}
               >
                 <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
                 <XAxis
@@ -867,7 +882,7 @@ export default function OverviewPage() {
             <ResponsiveContainer width="100%" height={300}>
               <BarChart
                 data={data}
-                margin={{ top: 20, right: 5, left: 0, bottom: 5 }}
+                margin={{ top: 60, right: 5, left: 0, bottom: 5 }}
               >
                 <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
                 <XAxis

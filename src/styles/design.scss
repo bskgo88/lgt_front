@@ -69,6 +69,20 @@
   .filterLine {display:flex; width:1px; height:20px; background-color:#666666; margin:0 16px;}
 }
 
+.layoutBar {
+  display:flex; width:100%; flex-direction:row; justify-content:space-between; align-items:center; margin-bottom:46px;
+  .layoutBox {
+    display:flex; flex-direction:row; justify-content:start; align-items:center; gap:12px;
+    strong {display:flex; font-size:14px; line-height:20px; font-weight:500; color:#666666;}
+    .layoubtn {
+      display:flex; flex-direction:row; justify-content:flex-start; align-items:center; border:1px solid #e6e6e6; background-color:#FFFFFF; padding:6px 12px; border-radius:6px; gap:8px;
+    }
+  }
+  .btnBox {
+    display:flex; flex-direction:row; justify-content:flex-end;
+  }
+}
+
 .searchInput {
   display: inline-flex; flex: 1 1 100px; background: none; color: white; border: none; padding: 8px; margin-right: 16px;
   &::placeholder { color: #ccc; }
