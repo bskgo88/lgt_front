@@ -38,7 +38,7 @@ const Header = () => {
   }, [router.pathname]);
 
   return (
-    <header style={{ backgroundColor: '#2F332E', padding: '10px 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <header style={{ width:"100%", backgroundColor: '#2F332E', padding: '10px 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <nav style={{ display: 'flex', alignItems: 'center' }}>
         <Link href="/">
           <div style={{ marginRight: '10px', cursor: 'pointer' }}>

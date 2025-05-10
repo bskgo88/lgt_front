@@ -1,3 +1,13 @@
+.LGTFullBox {
+  display:flex; height:100vh;
+  .LFTFInbox {
+    display:flex; flex-direction:column; justify-content:space-between; align-items:flex-start; height:100vh;
+  }
+  .contFullBox {
+    display:flex; flex:1; width:100%; background-color:#f5f5f2; flex-direction:column; justify-content:flex-start; align-items:flex-start;
+  }
+}
+
 .SetTDB {
   display:flex; width:100%; height:calc(100vh - 60px); justify-content:center; align-items:center;
 }
@@ -15,9 +25,9 @@
 }
 
 .overviewContainer {
-  display:flex; flex-direction:column; padding: 40px 40px 16px; background-color: #f4f6f8;
+  display:flex; width:100%; flex-direction:column; padding: 40px 40px 16px; background-color: #f4f6f8; justify-content:flex-start; align-items:flex-start;
   .overTop {
-    display:flex; flex-direction:row; justify-content:space-between; align-items:center; margin-bottom:20px;
+    display:flex; width:100%; flex-direction:row; justify-content:space-between; align-items:center; margin-bottom:20px;
   }
   .overviewTitle {
     font-size:24px; font-weight:600; text-align:left;
@@ -27,7 +37,7 @@
 }
 
 .overChartCont {
-  display:flex; flex-direction:column; padding: 0 40px 16px; background-color: #f4f6f8;
+  display:flex; width:100%; flex-direction:column; padding: 0 40px 16px; background-color: #f4f6f8;
   .gridBox {
     display:flex; flex-direction:column; padding:20px; background-color:#FFFFFF; border-radius: 12px;
     .GridTitle {
@@ -41,6 +51,10 @@
   }
 }
 
+.fullFooter {
+  display:flex; width:100%; justify-content:center; align-items:center; padding:64px 40px 16px; font-size:12px; font-weight:400; line-height:16px; color:#666666;
+}
+
 .selectItem {
   display:inline-flex; padding:6px 12px; border-radius:6px;
   option {color:#FFFFFF;}
@@ -48,7 +62,7 @@
 }
 
 .filterBar {
-  display: flex; justify-content:flex-start; align-items: center; margin-bottom: 24px; background-color: #2f332E; color: white; padding: 16px 20px; border-radius: 12px;
+  display: flex; width:100%; justify-content:flex-start; align-items: center; margin-bottom: 24px; background-color: #2f332E; color: white; padding: 16px 20px; border-radius: 12px;
   .filterButton {
     background:#FFFFFF; border:1px solid #e6e6e6; padding:5px; cursor: pointer; border-radius:6px; font-size:0;
   }
@@ -81,7 +95,7 @@
   img {margin-right:4px;}
 }
 .metricGrid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px;
+  display: grid; width:100%; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px;
 }
 .metricCard {
   display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; background-color: white; padding: 16px 20px; text-align: center; border-radius:12px; height: 122px; 
@@ -498,25 +512,26 @@
 .modalContent {
   display:flex; flex-direction:column; justify-content:flex-start; align-items:flex-start;
   background-color:#FFFFFF; border-radius:8px; box-shadow:0 4px 12px rgba(0, 0, 0, 0.15); max-width:1000px; max-height:700px; height:100%; overflow: hidden; border:1px solid #e6e6e6;
-  .filterTitle {
-    display:flex; width:100%; flex-direction:row; justify-content:flex-start; align-items:center; padding:32px 28px 8px 28px;
-    strong {display:flex; font-size:18px; font-weight:600; line-height:26px; color:#1a1a1a;}
-  }
-  .inboxDepth {
-    display:flex; flex-direction:row; justify-content:flex-start; align-items:flex-start; width:100%; height:calc(100% - 140px);
-    .leftDepth {
-      display:flex; flex-direction:column; justify-content:flex-start; align-items:flex-start; width:399px; height:100%; padding:0 8px;
-      .leftContent {
-        display:flex; flex-direction:column; justify-content:flex-start; align-items:flex-start; width:100%; height:100%; padding:24px 20px; overflow-y: auto;
-      }
+}
+
+.filterTitle {
+  display:flex; width:100%; flex-direction:row; justify-content:flex-start; align-items:center; padding:32px 28px 8px 28px;
+  strong {display:flex; font-size:18px; font-weight:600; line-height:26px; color:#1a1a1a;}
+}
+.inboxDepth {
+  display:flex; flex-direction:row; justify-content:flex-start; align-items:flex-start; width:100%; height:calc(100% - 140px);
+  .leftDepth {
+    display:flex; flex-direction:column; justify-content:flex-start; align-items:flex-start; width:399px; height:100%; padding:0 8px;
+    .leftContent {
+      display:flex; flex-direction:column; justify-content:flex-start; align-items:flex-start; width:100%; height:100%; padding:24px 20px; overflow-y: auto;
     }
-    .rightDepth {
-      display:flex; flex-direction:column; justify-content:flex-start; align-items:flex-start; width:599px; height:100%; padding:0 8px; border-left:1px solid #e6e6e6;
-      .rightContent {
-        display:flex; flex-direction:column; justify-content:flex-start; align-items:flex-start; width:100%; height:100%; padding:24px 20px; overflow-y: auto;
-        .filterCategory {
-          h4 {margin-bottom:24px;}
-        }
+  }
+  .rightDepth {
+    display:flex; flex-direction:column; justify-content:flex-start; align-items:flex-start; width:599px; height:100%; padding:0 8px; border-left:1px solid #e6e6e6;
+    .rightContent {
+      display:flex; flex-direction:column; justify-content:flex-start; align-items:flex-start; width:100%; height:100%; padding:24px 20px; overflow-y: auto;
+      .filterCategory {
+        h4 {margin-bottom:24px;}
       }
     }
   }
@@ -554,6 +569,9 @@
       > * {display:flex; width:calc(25% - 15px);}
     }
   }
+  .colCont {
+    display:flex; width:100%; flex-direction:column;
+  }
 }
 
 .rowLinebox {
@@ -585,7 +603,7 @@
       }
     }
   }
-  .text {display:flex; font-size:14px; line-height:20px; font-weight:400; color:#1a1a1a;}
+  .text {display:flex; flex:1; font-size:14px; line-height:20px; font-weight:400; color:#1a1a1a;}
 }
 
 .radioitem {
@@ -607,4 +625,96 @@
 .filterInput {
   padding:7px 15px 7px 15px; font-size:14px; appearance:none; border:1px solid #e6e6e6; border-radius:8px; min-width:0;
   &::placeholder {color:#b3b3b3;}
+}
+
+.AnalyticBox {
+  display:flex; width:100%; flex-direction:column;
+  .topBox {
+    display:flex; flex-direction:row; justify-content:space-between; align-items:center; margin-bottom:16px;
+    .tBLeft {display:flex; width:100%; max-width:600px; justify-content:flex-start; align-items:center;}
+    .tBRight {display:flex; justify-content:flex-end; align-items:center;}
+    .tab-button {
+      display:flex; flex:1 1 50%; background-color:#FFFFFF; border:1px solid #e6e6e6; height:40px; justify-content:center; align-items:center; cursor:pointer;
+      font-size:14px; font-weight:500; color:#666666; line-height:20px;
+      &:first-child {border-radius:8px 0 0 8px; border-right:none;}
+      &:last-child {border-radius:0 8px 8px 0; border-left:none;}
+      &.active {color:#FFFFFF; background-color:#2F332E; border-color:#2F332E;}
+    }
+
+    .run-button {
+      display:inline-block; justify-content:center; align-items:center; min-width:164px; border-radius:6px; background-color:#D4E7E5; padding:6px 12px;
+      font-size:14px; font-weight:500; line-height:20px; color:#FFFFFF; cursor:pointer;
+    }
+  }
+
+  .contentArea {
+    display: flex; flex-grow:1; // 남은 공간 모두 차지
+    .workbenchContent {
+      display: flex; width:100%; flex-grow:1; gap:16px;
+      .leftPanel {
+        display:flex; flex-direction:column; width:100%; max-width:400px; border-radius:12px; background-color:#FFFFFF;
+        .PanelBox {
+          display:flex; flex-direction:column; width:100%; justify-content:flex-start; align-items:flex-start; padding:12px 0 24px; gap:32px;
+          .filterBox {gap:32px; padding:0;}
+          .inTitle {padding:0 28px;}
+          .rowCont {padding:0 28px;}
+          .singleCont {padding:0 28px;}
+        }
+      }
+      .rightpanel {
+        display:flex; width:100%; flex-direction:column; justify-content:flex-start; align-items:flex-start; border-radius:12px; background-color:#FFFFFF; padding-bottom:12px;
+        .inboxCont {
+          display:flex; width:100%; flex-direction:column; justify-content:flex-start; align-items:flex-start;
+          .inBTitle {display:flex; width:100%; flex-direction:row; justify-content:space-between; align-items:flex-start; padding:24px 24px 8px; font-size:18px; font-weight:600; line-height:26px; color:#1a1a1a;}
+          .inBTCont {display:flex; width:100%; flex-direction:column; justify-content:flex-start; align-items:flex-start; padding:12px 28px;}
+        }
+      }
+    }
+
+    .savedcontent {
+      display:flex; flex-grow:1; width:100%; justify-content:flex-start; align-items:flex-start; flex-direction:row; flex-wrap:wrap; gap:12px;
+    }
+  }
+}
+
+.dimensionsection {
+  display:flex; width:100%; flex-direction:column; gap:0;
+  .sectionheader {
+    display: flex; width:100%; justify-content:space-between; align-items:center; padding:12px 28px 8px;
+    color:#666666; font-weight:500; font-size:14px; line-height:20px;
+  }
+  .sectioncontent {
+    display:flex; flex-direction:row; justify-content:flex-start; align-items:flex-start; flex-wrap:wrap; overflow: hidden; background-color:#f9f9f9; gap:24px;
+    .checkitem {flex:1 1 calc(50% - 15px);}
+  }
+}
+
+.toggleswitch {
+  display:flex; width:92px; height:32px; flex-direction:row; justify-content:flex-start; align-items:center; border-radius:8px; padding:2px; background-color:#e6e6e6; position:relative; cursor:pointer;
+  &.on {justify-content:flex-end;}
+  .toggletrack {display:flex; position:relative; width:44px; height:28px; border-radius:8px; background-color:#FFFFFF; z-index:1;}
+  .togglecontainer {
+    display:flex; flex-direction:row; justify-content:flex-start; align-items:center; position:absolute; top:0; left:0; width:100%; height:100%; z-index:2;
+    .label {display:flex; flex:1 1 50%; justify-content:center; align-items:center;}
+  }
+}
+
+.saveItem {
+  display:flex; flex-direction:column; width:calc(20% - 12px); background-color:#FFFFFF; border-radius:8px; padding-bottom:12px;
+  .SITitle {
+    display:flex; width:100%; flex-direction:row; justify-content:space-between; align-items:center; padding:24px 24px 8px;
+    .TitleName {display:flex; font-size:18px; line-height:26px; font-weight:600; color:#1a1a1a;}
+    .TitleIcon {
+      display:flex; flex-direction:row; justify-content:flex-end; align-items:center; gap:12px;
+      button {display:inline-flex; width:24px; height:24px; border:none; background-color:transparent; justify-content:center; align-items:center; cursor: pointer;}
+    }
+  }
+  .STCont {
+    display:flex; width:100%; flex-direction:column; padding:12px 28px; gap:32px;
+    .stcBox {
+      display:flex; width:100%; flex-direction:column; gap:8px;
+      .stcTitle {display:flex; font-size:14px; line-height:20px; font-weight:600; color:#1a1a1a;}
+      .stcText {display:flex; font-size:14px; line-height:20px; font-weight:400; color:#1a1a1a; word-break:keep-all;}
+    }
+  }
 }
